@@ -4,6 +4,9 @@ import numpy as np
 protein_dict = {"Q": 1, "N": 2, "K": 3, "W": 4, "F": 5, "P": 6, "Y": 7, "L": 8, "M": 9, "T": 10, "E": 11, "I": 12,
                 "A": 13, "R": 14, "G": 15, "H": 16, "S": 17, "D": 18, "V": 19, "C": 20}
 
+reverse_dict = {1: "Q", 2: "N", 3: "K", 4: "W", 5: "F", 6: "P", 7: "Y", 8: "L", 9: "M", 10: "T", 11: "E", 12: "I",
+                13: "A", 14: "R", 15: "G", 16: "H", 17: "S", 18: "D", 19: "V", 20: "C"}
+
 
 def ordinal_enc(protein_seq: str):
     """encode proteins as numbers 0-20 """
@@ -18,6 +21,14 @@ def encode_list(seq):
     for i in range(0, len(seq)):
         encoded_seq.append(ordinal_enc(seq[i]))
     return np.asarray(encoded_seq)
+
+
+def decode_list(enc_seq):
+    dec_seq = ''
+    for i in range(0, len(enc_seq)):
+        dec_seq += reverse_dict[i]
+
+    return dec_seq
 
 
 # ----------------------- evaluation functions ------------------------------------------------------------------
