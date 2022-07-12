@@ -23,7 +23,7 @@ def encode_list(seq):
     return np.asarray(encoded_seq)
 
 
-def decode_list(enc_seq):
+def decode(enc_seq):
     dec_seq = ''
     for i in range(0, len(enc_seq)):
         dec_seq += reverse_dict[i]
