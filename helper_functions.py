@@ -23,12 +23,15 @@ def encode_list(seq):
     return np.asarray(encoded_seq)
 
 
-def decode(enc_seq):
-    dec_seq = ''
-    for i in range(0, len(enc_seq)):
-        dec_seq += reverse_dict[i]
+def kmer_encoder(protein_seq: str, k: int):
+    """"take a string encoding a protein sequence and an integer k and return all substrings (-sequences) of length k"""
+    n = len(protein_seq)
+    res = []
 
-    return dec_seq
+    for i in range(0, n - k + 1):
+        res.append(protein_seq[i:i+k])
+
+    return res
 
 
 # ----------------------- evaluation functions ------------------------------------------------------------------
