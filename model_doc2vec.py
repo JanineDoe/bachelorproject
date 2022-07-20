@@ -86,7 +86,7 @@ def create_d2v_model(vector_size, epochs, kmers, mini_sample: 0):
     return model
 
 
-model = create_d2v_model(epochs=20, kmers=20, vector_size=10, mini_sample=0)
+#model = create_d2v_model(epochs=20, kmers=20, vector_size=100, mini_sample=0)
 
 # ep = 20, k =  20, vec_size = 10  ------------ accurracy: 0,
 # ep = 30, k =  20, vec_size = 100  ------------ accurracy: 0,416
