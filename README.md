@@ -3,7 +3,7 @@
 ~ a (failed) attempt to create a model that gets a certain part of the rna of a coronavirus as input and uses it to predict the virus' clade ~
 
 
-##explanation of the different files:
+## explanation of the different files:
  - comp_model: the 'main file', contains the final version of the model, only file that needs to be executed
                composed of a doc2vec model to 'preprocess' the data sequences and a sequential model
                
