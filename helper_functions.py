@@ -9,14 +9,15 @@ reverse_dict = {1: "Q", 2: "N", 3: "K", 4: "W", 5: "F", 6: "P", 7: "Y", 8: "L", 
 
 
 def ordinal_enc(protein_seq: str):
-    """encode proteins as numbers 0-20 """
+    """encode a protein sequence as a list of numbers between 0 and 20 """
     res = []
     for i in protein_seq:
         res.append(protein_dict[i])
     return np.asarray(res)
 
 
-def encode_list(seq):
+def encode_list(seq: list):
+    """encode a list of protein sequences (list of strings) as a list of lists of integers from 0 to 20 """
     encoded_seq = []
     for i in range(0, len(seq)):
         encoded_seq.append(ordinal_enc(seq[i]))
@@ -36,7 +37,7 @@ def kmer_encoder(protein_seq: str, k: int):
 
 # ----------------------- evaluation functions ------------------------------------------------------------------
 
-def confusion_matrix(pred_labels, actual_labels, num_clades = 17):
+def confusion_matrix(pred_labels, actual_labels, num_clades=17):
     # initialize empty 18 x 18 matrix
     matrix = [[0 for col in range(num_clades + 1)] for row in range(num_clades + 1)]
     # y-axis: actual clades, x-axis: predicted clades
@@ -48,7 +49,7 @@ def confusion_matrix(pred_labels, actual_labels, num_clades = 17):
 def accuracy(pred_labels, actual_labels):
     total = len(actual_labels)
     correct = 0
-    for i in range(0,len(actual_labels)):
+    for i in range(0, len(actual_labels)):
         if pred_labels[i] == actual_labels[i]:
             correct += 1
     return correct/total
