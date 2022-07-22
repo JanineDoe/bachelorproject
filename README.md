@@ -4,7 +4,7 @@
 
 
 ## explanation of the different files:
- - comp_model: the 'main file', contains the final version of the model, only file that needs to be executed
+ - comp_model: the 'main file', contains the final version of the model, only file that needs to be executed<br />
                composed of a doc2vec model to 'preprocess' the data sequences and a sequential model
                
  - model_doc2vec: contains function to build a doc2vec model that converts the amino acid sequences into vectors 
