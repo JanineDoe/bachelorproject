@@ -6,10 +6,10 @@ from keras.utils import np_utils
 from tensorflow import math
 from imblearn.over_sampling import RandomOverSampler
 from imblearn.under_sampling import RandomUnderSampler
-from helper_functions import confusion_matrix, accuracy, kmer_encoder
 from gensim.models.doc2vec import Doc2Vec
-from model_doc2vec import create_d2v_model
 from sklearn.preprocessing import MinMaxScaler
+from model_doc2vec import create_d2v_model
+from helper_functions import confusion_matrix, accuracy, kmer_encoder
 
 # parameters
 seq_length = 1273
@@ -19,7 +19,7 @@ number_clades = 17
 embedding_dim = 32
 kmer_size = 20
 
-# create or (load an already created doc2vec model
+# create or (load an already created doc2vec model)
 d2v_model = create_d2v_model(vector_size=200, number_epochs=20, kmer_size=kmer_size)
 #d2v_model = Doc2Vec.load('model_doc2vec.d2v')
 
@@ -41,7 +41,7 @@ for i in range(0, len(y_test)):
     X_test.append(np.asarray(d2v_model.infer_vector(kmer_encoder(test_data['Sequence'][i], kmer_size))))
     print(i + 1, ' of ', len(y_test))
 
-# uncomment and adapt values in dictionary if you want to balance the training data
+# uncomment and adapt values in dictionary to balance the training data
 '''
 # original distribution training data:
 # [1: 1328, 2: 1005, 3: 63252, 4: 12641, 5: 4623, 6: 912, 7: 22076, 8: 88, 9: 7460, 10: 22, 11: 35, 12: 2021,
@@ -74,7 +74,6 @@ vec_dim = (X_train[0]).shape[0]  # get vector dimension
 
 # build model
 model = Sequential()
-# need to do sth about embedding layer
 model.add(Embedding(input_dim=vec_dim * len(y_train), output_dim=embedding_dim, input_length=vec_dim))
 model.add(LSTM(100))
 model.add(Dense(number_clades + 1, activation='sigmoid'))

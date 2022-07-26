@@ -28,8 +28,8 @@ class EpochLogger(CallbackAny2Vec):
         self.epoch += 1
 
 
-def create_d2v_model(vector_size, number_epochs, kmer_size):
-    """creates and saves a trained doc2vec model"""
+def create_d2v_model(vector_size, number_epochs, kmer_size, eval=0):
+    """creates and saves a trained doc2vec model. Set eval to true to get a crude evaluation of the model"""
     kmer_size = kmer_size
     num_epochs = number_epochs
     vec_size = vector_size
@@ -62,17 +62,14 @@ def create_d2v_model(vector_size, number_epochs, kmer_size):
 
     model.save('model_doc2vec.d2v')
 
-    # uncomment for a crude evaluation of only the d2v model
-    '''
-    y_pred = []
-    for i in range(0, len(y_test)):
-        pred_vec = model.infer_vector(kmer_encoder(X_test[i], kmer_size))
-        y_pred.append((model.dv.most_similar(positive=pred_vec, topn=1))[0][0])
-        print(i + 1, ' of ', len(y_test))
+    if eval:
+        y_pred = []
+        for i in range(0, len(y_test)):
+            pred_vec = model.infer_vector(kmer_encoder(X_test[i], kmer_size))
+            y_pred.append((model.dv.most_similar(positive=pred_vec, topn=1))[0][0])
+        print(y_pred)
+        print("Accuracy: %.10f%%" % (accuracy(y_test, y_pred) * 100))
+        for i in range(0, number_clades+1):
+           print(confusion_matrix(y_test, y_pred)[i])
 
-    print(y_pred)
-    print("Accuracy: %.10f%%" % (accuracy(y_test, y_pred) * 100))
-    for i in range(0, number_clades+1):
-       print(confusion_matrix(y_test, y_pred)[i])
-    '''
     return model
